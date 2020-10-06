@@ -1,7 +1,7 @@
 const request = require("request");
 const cheerio = require("cheerio");
 
-function findUid (url) {
+function findUid (url, callback) {
 	url = new URL(url);
 	let next = false;
 
@@ -19,25 +19,29 @@ function findUid (url) {
 		break;
 	}
 
-	if (!next) throw new Error("Invalid URL!");
+	if (!next) return callback(new Error("Invalid URL!"));
+	if (url.protocol !== "https:" && url.protocol !== "http:") return callback(new Error("Invalid protocol"));
+	if (url.protocol !== "http:" && url.protocol !== "https:") return callback(new Error("Invalid protocol"));
 
 	const options = {
 		url: "https://id.atpsoftware.vn",
 		formData: {
-			link: url,
+			link: url.toString(),
 			getid: "Tìm kiếm uid"
 		}
 	};
 
 	/* eslint-disable no-unused-vars */
-	request.post(options, function optionalCallback(err, response, body) {
-		if (err) throw new Error(`ERR: Error when trying to post data`);
+	request.post(options, function (err, response, body) {
+		if (err) callback(new Error(`ERR: Error when trying to post data`));
 
 		let $ = cheerio.load(body);
 
-		return $(".uid-result").text();
+		callback(null, $(".uid-result").text());
 	});
 	/* eslint-disable no-unused-vars */
 }
 
 module.exports = findUid;
+
+findUid("https://www.facebook.com/kaysil.666", console.log);
