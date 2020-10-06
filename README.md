@@ -9,7 +9,7 @@ const facebookTools = require("facebook-tools");
 let uid;
 
 try {
-    uid = await facebookTools.findUid("https://faceboook.com/kaysil.666");
+    uid = await facebookTools.findUid("https://facebook.com/kaysil.666");
 } catch (e) {
     // Handle error...
 }
