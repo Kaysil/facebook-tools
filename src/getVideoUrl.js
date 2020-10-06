@@ -2,14 +2,15 @@ const request = require("request-promise");
 const cheerio = require("cheerio");
 
 /**
- * Find UID by Facebook profile URL
- * @param {string} url - Facebook profile URL to find UID
- * @returns {string} UID of the user
+ * Get raw video URL from a post
+ * @param {string} url - URL of the video
+ * @returns {string} raw video url
  */
-async function findUid (url) {
+async function getVideoUrl(url) {
 	if (typeof url !== "string") throw new Error("URL must be string");
 
 	url = new URL(url);
+
 	let next = false;
 
 	// Validation URL
@@ -31,30 +32,34 @@ async function findUid (url) {
 	if (url.protocol !== "http:" && url.protocol !== "https:") throw new Error("Invalid protocol");
 
 	let options = {
-		url: "https://id.atpsoftware.vn",
+		url: "https://fbdown.net/download.php",
 		formData: {
-			link: url.toString(),
-			getid: "Tìm kiếm uid"
+			URLz: url.toString()
 		}
 	};
-
+    
 	let response;
 
 	try {
 		response = await request.post(options);
 	} catch (e) {
-		throw new Error("ERR: Error when trying to get response");
+		throw new Error("ERR: Error when trying to request or maybe link is invalid");
 	}
 
 	let $;
-	
+
 	try {
 		$ = cheerio.load(response);
 	} catch (e) {
-		throw new Error("ERR: Error when loading data");
+		throw new Error("ERR: Error when trying to load response");
 	}
+    
+	let obj = {
+		sdLink: $("#sdlink").attr("href"),
+		hdLink: $("#hdlink").attr("href")
+	};
 
-	return $(".uid-result").text();
+	return obj;
 }
 
-module.exports = findUid;
+module.exports = getVideoUrl;

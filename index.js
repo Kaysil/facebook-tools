@@ -1,3 +1,4 @@
 module.exports = {
-	findUid: require("./src/findUid")
+	findUid: require("./src/findUid"),
+	getVideoUrl: require("./src/getVideoUrl")
 };
