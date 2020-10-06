@@ -3,13 +3,10 @@
 ## Example:
 
 ### Find UID:
+```javascript
+const facebookTools = require("facebook-tools");
 
-    ```
-    const facebookTools = require("facebook-tools");
-    
-    console.log(facebookTools.findUid("https://facebook.com/kaysil.666"))
-    ```
-
+console.log(facebookTools.getUid("https://facebook.com/kaysil.666"));
+```
 ### Video Downloader:
-
-    - Coming soon!!
+- Coming soon
