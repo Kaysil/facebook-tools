@@ -35,7 +35,13 @@ function findUid (url, callback) {
 	request.post(options, function (err, response, body) {
 		if (err) callback(new Error(`ERR: Error when trying to post data`));
 
-		let $ = cheerio.load(body);
+		let $;
+		
+		try {
+			$ = cheerio.load(body);
+		} catch (e) {
+			callback(new Error("ERR: Error when loading data"));
+		}
 
 		callback(null, $(".uid-result").text());
 	});
@@ -43,5 +49,3 @@ function findUid (url, callback) {
 }
 
 module.exports = findUid;
-
-findUid("https://www.facebook.com/kaysil.666", console.log);
