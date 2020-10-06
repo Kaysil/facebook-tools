@@ -2,7 +2,7 @@
 
 ## Example:
 
-    ### Find UID:
+### Find UID:
 
     ```
     const facebookTools = require("facebook-tools");
@@ -10,6 +10,6 @@
     console.log(facebookTools.findUid("https://facebook.com/kaysil.666"))
     ```
 
-    ### Video Downloader:
+### Video Downloader:
 
     - Coming soon!!
