@@ -1,13 +1,14 @@
 {
   "name": "facebook-tools",
-  "version": "1.5.1",
-  "description": "",
+  "version": "2.0.0",
+  "description": "Find facebook profile uid",
   "main": "index.js",
   "scripts": {
     "test": "npm run lint",
     "lint": "./node_modules/.bin/eslint **.js */**.js",
     "lintFix": "./node_modules/.bin/eslint **.js */**.js --fix"
   },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kaysil/facebook-tools.git"
