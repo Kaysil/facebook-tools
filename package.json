@@ -8,7 +8,6 @@
     "lint": "./node_modules/.bin/eslint **.js */**.js",
     "lintFix": "./node_modules/.bin/eslint **.js */**.js --fix"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kaysil/facebook-tools.git"
